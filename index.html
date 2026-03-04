@@ -771,6 +771,87 @@
   </div>
 </section>
 
+<!-- JOIN AS DRIVER -->
+<section id="join-driver" style="background: var(--dark); padding: 60px 20px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">انضم للفريق • Rejoignez-nous</div>
+      <h2 class="section-title">انضم كسائق توصيل</h2>
+      <p class="section-sub">اشتغل معنا وربح دخل إضافي كل يوم</p>
+    </div>
+    <div class="order-form" style="max-width:480px;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" id="driverName" placeholder="اسمك...">
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" id="driverPhone" placeholder="06XXXXXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>نوع الدراجة</label>
+        <select id="driverVehicle">
+          <option value="">-- اختار --</option>
+          <option>دراجة نارية</option>
+          <option>دراجة هوائية</option>
+          <option>سيارة</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>الحي / المنطقة</label>
+        <input type="text" id="driverArea" placeholder="حي الكرسي، المركز...">
+      </div>
+      <button class="btn-submit" style="background:linear-gradient(135deg,#2EC4B6,#0096c7);" onclick="registerDriver()">
+        🛵 سجل كسائق
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN AS STORE -->
+<section id="join-store" style="background: var(--dark2); padding: 60px 20px;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">شراكة تجارية • Partenariat</div>
+      <h2 class="section-title">شارك محلك معنا</h2>
+      <p class="section-sub">زيد زبائنك وتوصل لأكثر ناس في أولاد تايمة</p>
+    </div>
+    <div class="order-form" style="max-width:480px;">
+      <div class="form-row">
+        <div class="form-group">
+          <label>اسم المحل</label>
+          <input type="text" id="storeName" placeholder="اسم المحل...">
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف</label>
+          <input type="tel" id="storePhone" placeholder="06XXXXXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>نوع المحل</label>
+        <select id="storeType">
+          <option value="">-- اختار --</option>
+          <option>مطعم</option>
+          <option>صيدلية</option>
+          <option>بقالة / سوبيرمارشي</option>
+          <option>مقهى / مخبزة</option>
+          <option>حلويات</option>
+          <option>أخرى</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>العنوان</label>
+        <input type="text" id="storeAddress" placeholder="الحي، الشارع...">
+      </div>
+      <button class="btn-submit" onclick="registerStore()">
+        🏪 سجل محلك
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><span>واصلني</span></div>
@@ -897,6 +978,30 @@
     showToast('✅ تم تأكيد الاستلام! شكراً لك');
     document.getElementById('confirmPhone').value = '';
     document.getElementById('confirmShop').value = '';
+  }
+
+  // Register Driver
+  function registerDriver() {
+    const name = document.getElementById('driverName').value;
+    const phone = document.getElementById('driverPhone').value;
+    const vehicle = document.getElementById('driverVehicle').value;
+    const area = document.getElementById('driverArea').value;
+    if (!name || !phone || !vehicle || !area) { showToast('⚠️ كمل جميع الخانات', true); return; }
+    const msg = `🛵 *طلب انضمام سائق — واصلني*\n\n👤 الاسم: ${name}\n📞 الهاتف: ${phone}\n🏍️ الدراجة: ${vehicle}\n📍 المنطقة: ${area}`;
+    window.open(`https://wa.me/212679610616?text=${encodeURIComponent(msg)}`, '_blank');
+    showToast('✅ تم إرسال طلبك! سنتواصل معك قريباً');
+  }
+
+  // Register Store
+  function registerStore() {
+    const name = document.getElementById('storeName').value;
+    const phone = document.getElementById('storePhone').value;
+    const type = document.getElementById('storeType').value;
+    const address = document.getElementById('storeAddress').value;
+    if (!name || !phone || !type || !address) { showToast('⚠️ كمل جميع الخانات', true); return; }
+    const msg = `🏪 *طلب شراكة محل — واصلني*\n\n🏪 المحل: ${name}\n📞 الهاتف: ${phone}\n🏷️ النوع: ${type}\n📍 العنوان: ${address}`;
+    window.open(`https://wa.me/212679610616?text=${encodeURIComponent(msg)}`, '_blank');
+    showToast('✅ تم إرسال طلبك! سنتواصل معك قريباً');
   }
 
   // PWA Install
